@@ -24,7 +24,7 @@ router.get("/burgers", function(req, res) {
     });
   });
   
-  router.post("/api/burgers/create", function(req, res) {
+  router.post("/burgers/create", function(req, res) {
     burgers.create([
       "burger_name", "devoured"
     ], [
@@ -32,10 +32,11 @@ router.get("/burgers", function(req, res) {
     ], function(result) {
       // Send back the ID of the new quote
       res.json({ id: result.insertId });
+      res.render("index", hbsObject);
     });
   });
   
-  router.put("/api/burgers/update/:id", function(req, res) {
+  router.put("/burgers/update/:id", function(req, res) {
     var condition = "id = " + req.params.id;
   
     console.log("condition", condition);
@@ -49,10 +50,11 @@ router.get("/burgers", function(req, res) {
       } else {
         res.status(200).end();
       }
+      res.render("index", hbsObject);
     });
   });
   
-  router.delete("/api/burgers/delete/:id", function(req, res) {
+  router.delete("/burgers/delete/:id", function(req, res) {
     var condition = "id = " + req.params.id;
   
     cat.delete(condition, function(result) {
@@ -62,6 +64,7 @@ router.get("/burgers", function(req, res) {
       } else {
         res.status(200).end();
       }
+      res.render("index", hbsObject);
     });
   });
   
