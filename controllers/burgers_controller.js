@@ -30,18 +30,18 @@ router.put("/:id", function(req, res) {
 
   burgers.update({
     devoured: req.body.devoured
-  }, condition, function() {
-    res.redirect("/");
+  }, condition, function(result) {
+
+    if(result.changedRows == 0){
+      return res.status(404).end();
+    }else{
+      res.status(200).end();
+    }
+    // res.redirect("/");
   });
 });
 
-router.delete("/:id", function(req, res) {
-  var condition = "id = " + req.params.id;
 
-  burgers.delete(condition, function() {
-    res.redirect("/");
-  });
-});
 
 
   
